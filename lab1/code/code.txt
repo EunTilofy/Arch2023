@@ -1,0 +1,96 @@
+
+all_test.o:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00000000 <__start>:
+   0:	00000013          	nop
+   4:	00402103          	lw	sp,4(zero) # 4 <__start+0x4>
+   8:	00802203          	lw	tp,8(zero) # 8 <__start+0x8>
+   c:	004100b3          	add	ra,sp,tp
+  10:	fff08093          	addi	ra,ra,-1
+  14:	00c02283          	lw	t0,12(zero) # c <__start+0xc>
+  18:	01002303          	lw	t1,16(zero) # 10 <__start+0x10>
+  1c:	01402383          	lw	t2,20(zero) # 14 <__start+0x14>
+  20:	402200b3          	sub	ra,tp,sp
+  24:	002270b3          	and	ra,tp,sp
+  28:	002260b3          	or	ra,tp,sp
+  2c:	002240b3          	xor	ra,tp,sp
+  30:	002210b3          	sll	ra,tp,sp
+  34:	002220b3          	slt	ra,tp,sp
+  38:	004120b3          	slt	ra,sp,tp
+  3c:	002350b3          	srl	ra,t1,sp
+  40:	402350b3          	sra	ra,t1,sp
+  44:	4023d0b3          	sra	ra,t2,sp
+  48:	007330b3          	sltu	ra,t1,t2
+  4c:	0063b0b3          	sltu	ra,t2,t1
+  50:	00000033          	add	zero,zero,zero
+  54:	ffd50093          	addi	ra,a0,-3
+  58:	00f27093          	andi	ra,tp,15
+  5c:	00f26093          	ori	ra,tp,15
+  60:	00f24093          	xori	ra,tp,15
+  64:	00f22093          	slti	ra,tp,15
+  68:	00121093          	slli	ra,tp,0x1
+  6c:	00225093          	srli	ra,tp,0x2
+  70:	40c35093          	srai	ra,t1,0xc
+  74:	fff33093          	sltiu	ra,t1,-1
+  78:	fff3b093          	sltiu	ra,t2,-1
+  7c:	00520863          	beq	tp,t0,8c <label0>
+  80:	00420663          	beq	tp,tp,8c <label0>
+  84:	00000013          	nop
+  88:	00000013          	nop
+
+0000008c <label0>:
+  8c:	00421863          	bne	tp,tp,9c <label1>
+  90:	00521663          	bne	tp,t0,9c <label1>
+  94:	00000013          	nop
+  98:	00000013          	nop
+
+0000009c <label1>:
+  9c:	0042c863          	blt	t0,tp,ac <label2>
+  a0:	00524663          	blt	tp,t0,ac <label2>
+  a4:	00000013          	nop
+  a8:	00000013          	nop
+
+000000ac <label2>:
+  ac:	00736863          	bltu	t1,t2,bc <label3>
+  b0:	0063e663          	bltu	t2,t1,bc <label3>
+  b4:	00000013          	nop
+  b8:	00000013          	nop
+
+000000bc <label3>:
+  bc:	00525863          	bge	tp,t0,cc <label4>
+  c0:	0042d663          	bge	t0,tp,cc <label4>
+  c4:	00000013          	nop
+  c8:	00000013          	nop
+
+000000cc <label4>:
+  cc:	0063f863          	bgeu	t2,t1,dc <label5>
+  d0:	00737663          	bgeu	t1,t2,dc <label5>
+  d4:	00000013          	nop
+  d8:	00000013          	nop
+
+000000dc <label5>:
+  dc:	00425663          	bge	tp,tp,e8 <label6>
+  e0:	00000013          	nop
+  e4:	00000013          	nop
+
+000000e8 <label6>:
+  e8:	000040b7          	lui	ra,0x4
+  ec:	000000ef          	jal	ra,ec <label6+0x4>
+  f0:	00000013          	nop
+  f4:	00000013          	nop
+  f8:	01802403          	lw	s0,24(zero) # 18 <__start+0x18>
+  fc:	00802e23          	sw	s0,28(zero) # 1c <__start+0x1c>
+ 100:	01c02083          	lw	ra,28(zero) # 1c <__start+0x1c>
+ 104:	02801023          	sh	s0,32(zero) # 20 <__start+0x20>
+ 108:	02002083          	lw	ra,32(zero) # 20 <__start+0x20>
+ 10c:	02800223          	sb	s0,36(zero) # 24 <__start+0x24>
+ 110:	02402083          	lw	ra,36(zero) # 24 <__start+0x24>
+ 114:	01a01083          	lh	ra,26(zero) # 1a <__start+0x1a>
+ 118:	01a05083          	lhu	ra,26(zero) # 1a <__start+0x1a>
+ 11c:	01b00083          	lb	ra,27(zero) # 1b <__start+0x1b>
+ 120:	01b04083          	lbu	ra,27(zero) # 1b <__start+0x1b>
+ 124:	ffff0097          	auipc	ra,0xffff0
+ 128:	000000e7          	jalr	zero # 0 <__start>
