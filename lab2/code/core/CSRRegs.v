@@ -29,27 +29,31 @@ module CSRRegs(
     wire[3:0] waddr_map = (waddr[6] << 3) + waddr[2:0];
 
     assign mstatus = CSR[0];
-
-    assign rdata = CSR[raddr_map];
+    reg [31:0] mtval;
+    reg [31:0] rdata_val;
+    
+    assign rdata = rdata_val;
 
     always@(*) begin
-        if(mtval_data_in) begin
-            CSR[3] = mtval_data;
+        if(raddr_map == 3) begin
+            rdata_val = mtval;
+        end else begin
+            rdata_val = CSR[raddr_map];
         end
     end
 
     always@(posedge clk or posedge rst) begin
         if(rst) begin
-            CSR[3] <= 0;
+            mtval <= 0;
         end
         else if(mtval_data_in) begin
-            CSR[3] <= mtval_data;
+            mtval <= mtval_data;
         end else if(csr_w & waddr_map == 3) begin
             case(csr_wsc_mode)
-                2'b01: CSR[3] <= wdata;
-                2'b10: CSR[3] <= CSR[3] | wdata;
-                2'b11: CSR[3] <= CSR[3] & ~wdata;
-                default: CSR[3] <= wdata;
+                2'b01: mtval <= wdata;
+                2'b10: mtval <= mtval | wdata;
+                2'b11: mtval <= mtval & ~wdata;
+                default: mtval <= wdata;
             endcase    
         end
     end
